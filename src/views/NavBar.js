@@ -14,10 +14,12 @@ export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 	
 	return (
 		<Appbar inline>
-			<Heading>Evolution/Quarentine and Chill</Heading>
-			<Subheading>{'user.name'}</Subheading>
+			<Heading>Quarantine and Chill</Heading>
+			<Subheading>{user.username}</Subheading>
 			<BubbleButton
 				onPress={async () => {
+					await User.logout();
+
 					redirect('/login');
 				}}
 			>
