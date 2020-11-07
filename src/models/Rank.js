@@ -1,6 +1,5 @@
 import { Model, string, integer, include, hasMany, session } from '@triframe/scribe'
 import { Resource } from '@triframe/core'
-import { session } from '@triframe/scribe';
 
 export class Rank extends Resource {
 	@include(Model)
