@@ -1,4 +1,4 @@
-import { Model, integer, include, hasMany, hasOne } from '@triframe/scribe';
+import { Model, integer, boolean, include, hasMany, hasOne, belongsTo } from '@triframe/scribe';
 import { Resource } from '@triframe/core';
 
 export class Round extends Resource {
@@ -7,8 +7,14 @@ export class Round extends Resource {
     @integer
     time = 0  // initial time remaining at start ??? 5 / 10 / 15
 
+    @boolean
+    isFull = false
+
 	@hasMany({ as : 'round'})
     users = []
+
+    @belongsTo({ a: 'Rank' })
+    rank = null
 
     @hasOne
     timer = null

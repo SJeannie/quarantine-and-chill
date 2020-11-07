@@ -1,6 +1,7 @@
 import { Model, string, include, belongsTo, session, stream } from '@triframe/scribe';
 import { Resource } from '@triframe/core';
 import { Rank } from './Rank';
+import { Round } from './Round';
 
 export class User extends Resource {
     @include(Model)
@@ -40,6 +41,19 @@ export class User extends Resource {
     @session
     static async logout(session) {
         session.loggedInUserId = null
+    }
+
+    @session
+    static async findMatching(session, rankId){
+        
+        let [round]  = await Round.where({rankId: rankId, isFull: false})
+        if (!round) {
+            round = await Round.create({rankId: rankId})
+        } else {
+            round.isFull = true
+        }
+        const user = await User.read(session.loggedInUserId)
+        user.roundId = round.id  
     }
 
 }
