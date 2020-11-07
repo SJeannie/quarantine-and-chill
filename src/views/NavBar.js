@@ -9,24 +9,26 @@ import {
 	Area
 } from '@triframe/designer';
 
-export const NavBar = tether(function* ({ Api, redirect, session }) {
-
-    const { User } = Api
-    // const user = User.read(session.loggedInUserID)
-
+export const NavBar = tether(function* ({ Api: { User }, redirect }) {
+	const user = yield User.current();
+	
 	return (
 		<Appbar inline>
-			<Heading>Evolution/Quarentine and Chill</Heading>
-			<Subheading>{'user.name'}</Subheading>
-			<BubbleButton
-				onPress={async () => {
-					// await user.delete(session.loggedInUserID);
-					// session.loggedInUserID
-					redirect('/login');
-				}}
-			>
-				Leave
-			</BubbleButton>
+			<Heading>Quarantine and Chill</Heading>
+			{user && (
+				<>
+					<Subheading>{user.username}</Subheading>
+					<BubbleButton
+						onPress={async () => {
+						await User.logout();
+
+						redirect('/login');
+						}}
+					>
+						Log out
+					</BubbleButton>
+				</>
+			)}
 		</Appbar>
 	);
 });

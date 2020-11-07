@@ -28,7 +28,7 @@ export const Login = tether(function* ({Api, redirect, session}) {
                     redirect('/')
 				}}
 			>
-				Evolve
+				Log in
 			</Button>
 		</Container>
 	);
