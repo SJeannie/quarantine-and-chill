@@ -6,7 +6,7 @@ export class User extends Resource {
     @include(Model)
 
 	@string
-    name = ''
+    username = ''
 
 	@belongsTo ({ a: 'Rank' })
 	rank = Rank.read(1)
@@ -14,9 +14,17 @@ export class User extends Resource {
 	@belongsTo ({ a: 'Round' })
     round = null
 
-    // @session
-    // static async setSession(session, userID){
-    //     session.loggedInUserID = userID
-    // }
+    @session
+    static async login(session, username){
+        let [ user ] = await User.where({ username });
+
+        if (!user) { 
+            user = await User.create({ username })
+        }
+
+        session.loggedInUserId = user.id
+
+        return null;
+    }
 
 }

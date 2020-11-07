@@ -24,8 +24,7 @@ export const Login = tether(function* ({Api, redirect, session}) {
 			/>
 			<Button
 				onPress={async () => {
-                    let user = await User.create({name: form.username});
-                    // User.setSession(user.id)
+					await User.login(form.username)
                     redirect('/')
 				}}
 			>
