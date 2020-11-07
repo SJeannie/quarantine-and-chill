@@ -27,4 +27,13 @@ export class User extends Resource {
         return null;
     }
 
+    @session
+    @stream
+    static *current(session){
+        return (
+            session.loggedInUserId !== null
+                ? yield User.read(session.loggedInUserId)
+                : null
+        )
+    }
 }
