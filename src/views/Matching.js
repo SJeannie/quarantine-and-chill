@@ -4,9 +4,7 @@ import {
 	Column,
 	Grid
 } from '@triframe/designer';
-import { NavBar } from './NavBar'
 import { Ticker } from './Ticker';
-import { Chat } from './Chat';
 
 export const Matching = tether(function* ({ Api, redirect, session }) {
 	return (

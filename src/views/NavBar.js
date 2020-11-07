@@ -15,16 +15,20 @@ export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 	return (
 		<Appbar inline>
 			<Heading>Quarantine and Chill</Heading>
-			<Subheading>{user.username}</Subheading>
-			<BubbleButton
-				onPress={async () => {
-					await User.logout();
+			{user && (
+				<>
+					<Subheading>{user.username}</Subheading>
+					<BubbleButton
+						onPress={async () => {
+						await User.logout();
 
-					redirect('/login');
-				}}
-			>
-				Log out
-			</BubbleButton>
+						redirect('/login');
+						}}
+					>
+						Log out
+					</BubbleButton>
+				</>
+			)}
 		</Appbar>
 	);
 });
