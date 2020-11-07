@@ -5,9 +5,11 @@ import { Login } from './views/Login';
 import { Matching } from './views/Matching'
 import { NavBar } from './views/NavBar'
 import { Ticker } from './views/Ticker'
+import GlobalStyle from './theme';
 
 export default () => (
 	<Provider url={process.env.REACT_APP_BACKEND_URL}>
+		<GlobalStyle />
 		<Container>
 			<NavBar />
 			<Route exact path='/login' component={Login} />
