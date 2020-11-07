@@ -13,4 +13,13 @@ export class Round extends Resource {
     @hasOne
     timer = null
 
+    async startTimer(){
+        let timer = await Timer.create({ roundId : this.id })
+    }
+
+    async static start(){
+        let round = await Round.create()
+        round.startTimer()
+    }
+
 }
