@@ -1,4 +1,4 @@
-import { Model, integer, include, hasMany } from '@triframe/scribe';
+import { Model, integer, include, hasMany, hasOne } from '@triframe/scribe';
 import { Resource } from '@triframe/core';
 
 export class Round extends Resource {
@@ -11,5 +11,6 @@ export class Round extends Resource {
     users = []
 
     @hasOne
-	timer = null
+    timer = null
+
 }
