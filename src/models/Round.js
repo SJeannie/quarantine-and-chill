@@ -3,13 +3,10 @@ import { Resource } from '@triframe/core';
 
 export class Round extends Resource {
     @include(Model)
-    
+
     @integer
     time = 0  // intitial time remaing at start ??? 5 / 10 / 15
 
-	// @hasMany({of: 'User'})    // Not sure what the argument should be
-    // players = []              // Users as players
-    
-	@hasMany
-	users = []; // Users as users
+	@hasMany({ as : 'round'})
+	users = []
 }
