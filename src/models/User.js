@@ -18,7 +18,7 @@ export class User extends Resource {
     static async login(session, username){
         let [ user ] = await User.where({ username });
 
-        if (!user) { 
+        if (!user) {
             user = await User.create({ username })
         }
 
