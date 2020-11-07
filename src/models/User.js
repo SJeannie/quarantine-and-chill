@@ -36,4 +36,10 @@ export class User extends Resource {
                 : null
         )
     }
+
+    @session
+    static async logout(session) {
+        session.loggedInUserId = null
+    }
+
 }
