@@ -10,10 +10,7 @@ export class Rank extends Resource {
 	// image = ''
 
 	@integer  // rank as a number
-	position = 0 
-
-	// @hasMany({of: 'User'})    // Not sure what the argument should be
-	// players = []              // Users as players
+	position = 0
 
 	@hasMany({ as: 'rank'})
   users = []
