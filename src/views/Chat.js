@@ -2,7 +2,7 @@ import React from 'react'
 import { tether, Section, TextInput, List, Container, Heading, Button } from '@triframe/designer'
 
 
-export const MainPage = tether(function*({ Api }) {
+export const Chat = tether(function*({ Api }) {
 
     const { Message } = Api;
 

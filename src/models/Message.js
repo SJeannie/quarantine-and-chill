@@ -1,11 +1,14 @@
-import { Model, string, include } from '@triframe/scribe'
-import { Resource } from '@triframe/core'
+import { Model, string, integer, include, belongsTo } from '@triframe/scribe';
+import { Resource } from '@triframe/core';
 
 export class Message extends Resource {
+	@include(Model)
+	@string
+	content = '';
 
-    @include(Model)
+	@belongsTo({a: 'User'})
+	user = null;
 
-    @string
-    content = ""
-
+	// @belongsTo({a: 'User'})  // argument for Users as players ???
+	// player = null;
 }
