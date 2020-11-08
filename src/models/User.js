@@ -56,4 +56,23 @@ export class User extends Resource {
         user.roundId = round.id  
     }
 
+    @session
+    async promote(session) {
+        user = await User.read(session.loggedInUserId)
+        if(user.rankId<4){
+            user.rankId++
+        }
+    }
+
+    @session
+    async demote(session) {
+        user = await User.read(session.loggedInUserId)
+        if(user.rankId===4){
+            user.rankId=1
+        }
+        if(user.rankId<4 && user.rankId>1){
+            user.rankId--
+        }
+    }
+
 }
