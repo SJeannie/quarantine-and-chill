@@ -19,14 +19,14 @@ export const seed = async () => {
     await Rank.create({
 			title: 'Chicken',
 			position: 2,
-			image: '.egg.png',
+			image: 'chicken.png',
 		});
     await Rank.create({
 			title: 'Overlord',
 			position: 3,
-			image: 'egg.png',
+			image: 'overlord.png',
         });
-        
+
     console.log('seed finished');
 
 }
