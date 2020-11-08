@@ -16,7 +16,7 @@ import {
 	Paragraph,
 } from '@triframe/designer';
 
-export const Ticker = tether(function* ({ Api, redirect }) {
+export const Ticker = tether(function* ({ Api }) {
 	const { User, Rank } = Api;
 
 	let users = yield User.list(`
@@ -26,22 +26,20 @@ export const Ticker = tether(function* ({ Api, redirect }) {
         }
     `);
 
-	console.log(users);
-
 	return (
 		<Container>
 			<Heading>Players</Heading>
 			{users.map(user => {
 				return (
-					<Section>
+					<Section key={user.id} >
 						<Card>
 							<Grid base={9}>
 								<Column xs={4}>
-									<Avatar.Image /> {/* user.rank.image*/}
+									<Avatar.Image /> 
 								</Column>
 								<Column xs={4}>
 									<Subheading>{user.username}</Subheading>
-									<Divider></Divider>
+									<Divider/>
 									<Paragraph>{user.rank.title}</Paragraph>
 								</Column>
 								<Column>
