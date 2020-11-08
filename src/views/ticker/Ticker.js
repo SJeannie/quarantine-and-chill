@@ -28,7 +28,7 @@ export const Ticker = tether(function* ({ Api }) {
 	return (
 		<Container>
 			<Heading>Players</Heading>
-			{users.map(user => <TickerCard key={user.id} user={user} />)}
+			{users.sort((a, b) => b.rank.position - a.rank.position).map(user => <TickerCard key={user.id} user={user} />)}
 		</Container>
 	);
 });
