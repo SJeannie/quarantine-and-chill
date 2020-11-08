@@ -1,4 +1,4 @@
-import { Model, string, include, belongsTo, session, stream } from '@triframe/scribe';
+import { Model, string, boolean, include, belongsTo, session, stream } from '@triframe/scribe';
 import { Resource } from '@triframe/core';
 import { Rank } from './Rank';
 import { Round } from './Round';
@@ -8,6 +8,9 @@ export class User extends Resource {
 
 	@string
     username = ''
+
+    @boolean
+    isWinner = false
 
 	@belongsTo ({ a: 'Rank' })
 	rank = null
@@ -59,6 +62,7 @@ export class User extends Resource {
     @session
     async promote(session) {
         user = await User.read(session.loggedInUserId)
+        user.isWinner = true
         if(user.rankId<4){
             user.rankId++
         }
@@ -67,6 +71,7 @@ export class User extends Resource {
     @session
     async demote(session) {
         user = await User.read(session.loggedInUserId)
+        user.isWinner = false
         if(user.rankId===4){
             user.rankId=1
         }
