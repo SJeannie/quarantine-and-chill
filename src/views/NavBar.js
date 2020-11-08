@@ -49,7 +49,7 @@ export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 			<Grid base={9}>
 				<Column xs={8}>
 					<HeaderContainer userExists={!!user}>
-						<Heading>Quarantine and Chill</Heading>
+						<Heading>Quarantine and Chill: Evolution</Heading>
 						<Subheading>Hey {user.username}!!!</Subheading>
 					</HeaderContainer>
 				</Column>
