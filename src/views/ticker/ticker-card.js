@@ -21,7 +21,7 @@ const RankImage = styled.img`
 
 const TickerCard = tether(function*({ props: { user }, Api: { Rank } }) {
     const rank = yield Rank.read(user.rankId);
-    console.log(rank.id);
+
     return (
         <Section key={user.id} >
             <Card>
