@@ -19,32 +19,37 @@ const RankImage = styled.img`
     border-radius: 50%;
 `;
 
-const TickerCard = tether(function*({ props: { user }, Api: { Rank } }) {
+const TickerCard = tether(function*({ props: { user, color }, Api: { Rank } }) {
     const rank = yield Rank.read(user.rankId);
 
     return (
-        <Section key={user.id} >
-            <Card>
-                <Grid base={9}>
-                    <Column xs={4}>
-                        <RankImage src={require(`../../assets/${rank.image}`)} /> 
-                    </Column>
-                    <Column xs={4}>
-                        <Subheading>{user.username}</Subheading>
-                        <Divider/>
-                        <Paragraph>{rank.title}</Paragraph>
-                    </Column>
-                    <Column>
-                        {user.isWinner ? (
-                            <Icon name='arrow-up-circle-outline' />
-                        ) : (
-                            <Icon name='arrow-down-circle' />
-                        )}
-                    </Column>
-                </Grid>
-            </Card>
-        </Section>
-    )
+			<Section key={user.id}>
+				<Card
+					style={{
+						backgroundColor: color,
+					}}
+				>
+					<Grid base={9}>
+						<Column
+							xs={2}
+							style={{
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<RankImage src={require(`../../assets/${rank.image}`)} />
+						</Column>
+						<Column
+							xs={6}
+						>
+							<Subheading>{user.username}</Subheading>
+							<Divider />
+							<Paragraph>{rank.title}</Paragraph>
+						</Column>
+					</Grid>
+				</Card>
+			</Section>
+		);
 })
 
 export default TickerCard;

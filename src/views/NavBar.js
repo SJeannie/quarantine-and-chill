@@ -33,8 +33,14 @@ const HeaderContainer = styled.div`
 	background-color: #226fbe;
 `;
 
+const RankImage = styled.img`
+	width: 2em;
+	height: auto;
+	mix-blend-mode: multiply;
+`;
+
 export const NavBar = tether(function* ({ Api: { User }, redirect }) {
-	const user = yield User.current();
+	const user = yield User.current(`*, rank{*}`);
 
 	return (
 		<container
@@ -48,15 +54,20 @@ export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 			}}
 		>
 			<Grid base={9}>
-				<Column xs={8}>
+				<Column xs={7}>
 					<HeaderContainer userExists={!!user}>
 						<Heading>Quarantine and Chill: Evolution</Heading>
 						{user && <Subheading>Hey {user.username}!!!</Subheading>}
 					</HeaderContainer>
 				</Column>
+				{user && (
+					<Column style={{ alignItems: 'center', justifyContent: 'center' }}>
+						<RankImage src={require(`../assets/${user.rank.image}`)} />
+					</Column>
+				)}
 
 				{user && (
-					<Column>
+					<Column style={{ alignItems: 'center', justifyContent: 'center' }}>
 						<SignOutButton
 							onClick={async () => {
 								await User.logout();
