@@ -30,10 +30,10 @@ export class User extends Resource {
 
     @session
     @stream
-    static *current(session){
+    static *current(session, params){
         return (
             session.loggedInUserId !== null
-                ? yield User.read(session.loggedInUserId)
+                ? yield User.read(session.loggedInUserId, params)
                 : null
         )
     }

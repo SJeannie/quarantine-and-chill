@@ -1,5 +1,7 @@
 import { Model, integer, boolean, include, hasMany, hasOne, belongsTo } from '@triframe/scribe';
 import { Resource } from '@triframe/core';
+import { Timer } from './Timer';
+import { sleep } from "@triframe/confectioner"
 
 export class Round extends Resource {
     @include(Model)
@@ -19,13 +21,12 @@ export class Round extends Resource {
     @hasOne
     timer = null
 
-    async startTimer(){
-        let timer = await Timer.create({ roundId : this.id })
-    }
-
-    static async start(){
-        let round = await Round.create()
-        round.startTimer()
+    async runTimer(){
+        let timer = await Timer.create({ roundId : this.id, remaining: 5 })
+        while(timer.remaining > 0){
+            await sleep(1000)
+            timer.remaining--
+        } 
     }
 
 }
