@@ -72,7 +72,6 @@ export class User extends Resource {
     }
 
     async promote() {
-        console.log("promoted")
         this.isWinner = true
         if(this.rankId<4){
             this.rankId++
