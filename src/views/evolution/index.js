@@ -113,49 +113,42 @@ const NumberDisplay = styled.div`
     font-size: 10em;
 `;
 
-const Evolution = tether(function*({ Api: { User } }){
-    const rockPaperScissors = (userOneChoice, userTwoChoice) => {
-        const choiceMap = {
-            rock: {
-                rock: 'TIE',
-                paper: 'LOSS',
-                scissors: 'WIN'
-            },
-            paper: {
-                rock: 'WIN',
-                paper: 'TIE',
-                scissors: 'LOSS'
-            },
-            scissors: {
-                rock: 'LOSS',
-                paper: 'WIN',
-                scissors: 'TIE'
-            },
-        };
-
-        return choiceMap[userOneChoice][userTwoChoice];
+const Evolution = tether(function*({ props: { user }, afterFirstRender }){
+    afterFirstRender(() => {
+        user.round.runTimer();
+    });
+    console.log(user.round);
+    if (!user.round.timer) {
+        return null;
     }
 
     return (
+        user.round.result ? <Results result={user.round.result} /> : (
         <Container>
-            <NumberDisplay>5</NumberDisplay>
+            <NumberDisplay>{user.round.timer.remaining}</NumberDisplay>
             <HandsWrapper>
                 <LeftHand src='http://clipart-library.com/img1/1238756.png' alt='left hand' />
                 <RightHand src='http://clipart-library.com/img1/1238756.png' alt='right hand' />
             </HandsWrapper>
             <ButtonWrapper>
-                <Button>
+                <Button onClick={() => {
+                    user.makeChoice('rock');
+                }} disabled={user.choice !== null}>
                     <ButtonImage src='http://clipart-library.com/images_k/rock-clipart-transparent/rock-clipart-transparent-5.jpg' />
                 </Button>
-                <Button color='green'>
+                <Button color='green' onClick={() => {
+                    user.makeChoice('paper')
+                }} disabled={user.choice !== null}>
                     <ButtonImage src='http://clipart-library.com/data_images/64750.jpg' />
                 </Button>
-                <Button color='blue'>
+                <Button color='blue' onClick={() => {
+                    user.makeChoice('scissors')
+                }} disabled={user.choice !== null}>
                     <ButtonImage src='http://clipart-library.com/new_gallery/scissors-clip-art-15.jpg' />
                 </Button>
             </ButtonWrapper>
         </Container>
-    );
+    ));
 })
 
 export default Evolution;
