@@ -60,7 +60,8 @@ export class User extends Resource {
     @session
     static async findMatching(session, rankId){
         const user = await User.read(session.loggedInUserId)
-        user.choice = null
+        user.choice = null;
+        user.roundId = null;
 
         let [round]  = await Round.where({rankId: rankId, isFull: false});
         
