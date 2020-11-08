@@ -13,6 +13,7 @@ import { sleep } from '@triframe/confectioner';
 import { User } from './User';
 
 export class Round extends Resource {
+<<<<<<< HEAD
 	@include(Model)
 	@integer
 	result = null;

@@ -113,16 +113,11 @@ const NumberDisplay = styled.div`
     font-size: 10em;
 `;
 
-const Evolution = tether(function*({ props: { user }, Api }){
-    
-    const round = yield Api.Round.read(user.round.id)
-
-    console.log(user.round);
-
-    console.log(user.round.timeRemaining)
+const Evolution = tether(function*({ props: { user }, Api }){ 
+    const round = yield Api.Round.read(user.round.id);
 
     return (
-        round.result ? <Results result={round.result} /> : (
+        round.result ? <Results result={round.result} user={user} /> : (
         <Container>
             <NumberDisplay>{round.timeRemaining}</NumberDisplay>
             <HandsWrapper>

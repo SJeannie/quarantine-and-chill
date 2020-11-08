@@ -57,6 +57,7 @@ const PlayAgainButton = styled.button`
 	}
 `;
 
+<<<<<<< HEAD
 const Results = tether(function* ({
 	props: { result },
 	Api,
@@ -96,5 +97,27 @@ const Results = tether(function* ({
 		</Container>
 	);
 });
+=======
+const Results = tether(function* ({props: { result, user }, redirect, Api: { User }}){
+    const winner = ['W', 'I', 'N', 'N', 'E', 'R', '!'];
+    const loser = ['G', 'A', 'N', 'B', 'A', 'T', 'T', 'E', '!'];
+
+    return (
+        <Container>
+            <div style={{display: 'flex'}}>
+                {result === user.id ? winner.map((letter, i) => <DelayedLetter key={i} index={i}>{letter}</DelayedLetter>) :
+                loser.map((letter, i) => <DelayedLetter key={i} index={i} result={'LOSS'}>{letter}</DelayedLetter>)}
+            </div>
+            <RankImage src='http://clipart-library.com/image_gallery/n763807.png' />
+            <PlayAgainButton onClick={async () => {
+                    const user = await User.current();
+                    await User.findMatching(user.rankId);
+                    
+                    redirect('/');
+				}}>Play Again</PlayAgainButton>
+        </Container>
+    )
+})
+>>>>>>> d113fe8800d86ab655fe5b9f674a43840922b7d1
 
 export default Results;
