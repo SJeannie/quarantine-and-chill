@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-	tether,
-	Column,
-	Grid,
-	Container
-} from '@triframe/designer';
+import { tether, Column, Grid, Container } from '@triframe/designer';
 import { Ticker } from './Ticker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
@@ -19,10 +14,17 @@ const MatchingContainer = styled.div`
 export const Matching = tether(function* ({ Api, redirect, session }) {
 	return (
 		<Container>
+			<Grid base={7}>
+				<Column xs={5}>
 					<MatchingContainer>
 						<FontAwesomeIcon icon={faCircleNotch} spin />
 						&nbsp; matching…
 					</MatchingContainer>
+				</Column>
+				<Column xs={2}>
+					<Ticker></Ticker>
+				</Column>
+			</Grid>
 		</Container>
 	);
 });
