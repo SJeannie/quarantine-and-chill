@@ -1,6 +1,5 @@
 import { Model, boolean, include, hasMany, hasOne, belongsTo, string, integer } from '@triframe/scribe';
 import { Resource } from '@triframe/core';
-import { Timer } from './Timer';
 import { sleep } from "@triframe/confectioner"
 import { User } from './User';
 
@@ -13,14 +12,14 @@ export class Round extends Resource {
     @boolean
     isFull = false;
 
+    @integer
+    timeRemaining = 5
+
     @hasMany({ as: 'round' })
     users = [];
 
     @belongsTo({ a: 'Rank' })
     rank = null;
-
-    @hasOne
-    timer = null;
 
     async checkResults() {
         const [userA, userB] = await User.where({ roundId: this.id });
@@ -43,7 +42,9 @@ export class Round extends Resource {
             },
         }[userA.choice][userB.choice];
 
-        this.result = result?.id ?? null;
+        if (result) {
+            this.result = result.id
+        }
 
         if (result === null) {
             userA.choice = null;
@@ -54,17 +55,11 @@ export class Round extends Resource {
     }
 
     async runTimer() {
-        let { timer } = Round.read(this.id, `timer {remaining}`);
+        this.timeRemaining = 5
 
-        if (timer) {
-            this.timer.remaining = 5;
-        } else {
-            timer = await Timer.create({ roundId: this.id, remaining: 5 })
-        }
-
-        while (timer.remaining > 0) {
+        while (this.timeRemaining > 0) {
             await sleep(1000)
-            timer.remaining--
+            this.timeRemaining--
         }
 
         const users = await User.where({ roundId: this.id });

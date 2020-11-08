@@ -12,16 +12,16 @@ const MatchingContainer = styled.div`
 	font-size: 5em;
 `;
 
-export const Main = tether(function* ({ Api, redirect, session }) {
+export const Main = tether(function* ({ Api, redirect }) {
 	let { User } = Api;
-	let user = yield User.current(`*, rank {*}, round {result, isFull, timer {remaining}}`);
+	let user = yield User.current(`*, rank {*}, round {result, isFull, timeRemaining}`);
 
 	if (user) {
 		return (
 			<Container>
 				<Grid base={7}>
 					<Column xs={5}>
-						{user.round.isFull ? (
+						{user.round && user.round.isFull ? (
 							<Evolution user={user}></Evolution>
 						) : (
 							<MatchingContainer>
