@@ -115,17 +115,17 @@ const NumberDisplay = styled.div`
 
 const Evolution = tether(function*({ props: { user }, afterFirstRender }){
     afterFirstRender(() => {
-        round.runTimer();
+        user.round.runTimer();
     });
-
-    if (!round.timer) {
+    console.log(user.round);
+    if (!user.round.timer) {
         return null;
     }
 
     return (
-        user.round.results ? <Results result={user.round.results} /> : (
-            <Container>
-            <NumberDisplay>{round.timer.remaining}</NumberDisplay>
+        user.round.result ? <Results result={user.round.result} /> : (
+        <Container>
+            <NumberDisplay>{user.round.timer.remaining}</NumberDisplay>
             <HandsWrapper>
                 <LeftHand src='http://clipart-library.com/img1/1238756.png' alt='left hand' />
                 <RightHand src='http://clipart-library.com/img1/1238756.png' alt='right hand' />

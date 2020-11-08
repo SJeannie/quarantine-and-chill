@@ -14,7 +14,7 @@ const MatchingContainer = styled.div`
 
 export const Main = tether(function* ({ Api, redirect, session }) {
 	let { User } = Api;
-	let user = yield User.current(`*, rank {*}, round {*}`);
+	let user = yield User.current(`*, rank {*}, round {result, isFull, timer {remaining}}`);
 
 	if (user) {
 		return (

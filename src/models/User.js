@@ -25,6 +25,8 @@ export class User extends Resource {
         this.choice = choice;
 
         const round = await Round.read(this.roundId);
+
+        await round.checkResults();
     }
 
     @session
@@ -32,7 +34,7 @@ export class User extends Resource {
         let [ user ] = await User.where({ username });
 
         if (!user) {
-            user = await User.create({ username, rankId: (await Rank.where({position: 0}))[0].id })  
+            user = await User.create({ username, rankId: (await Rank.where({position: 0}))[0].id, roundId: null });
         }
 
         session.loggedInUserId = user.id
@@ -57,8 +59,8 @@ export class User extends Resource {
 
     @session
     static async findMatching(session, rankId){
-        
-        let [round]  = await Round.where({rankId: rankId, isFull: false})
+        let [round]  = await Round.where({rankId: rankId, isFull: false});
+
         if (!round) {
             round = await Round.create({rankId: rankId})
         } else {

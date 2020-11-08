@@ -22,8 +22,7 @@ export class Round extends Resource {
     @hasOne
     timer = null;
 
-    @session
-    async checkResults(session) {
+    async checkResults() {
         const [userA, userB] = await User.where({ roundId: this.id });
 
         const result = {
@@ -55,10 +54,12 @@ export class Round extends Resource {
     }
 
     async runTimer() {
-        if (this.timer) {
+        let { timer } = Round.read(this.id, `timer {remaining}`);
+
+        if (timer) {
             this.timer.remaining = 5;
         } else {
-            let timer = await Timer.create({ roundId: this.id, remaining: 5 })
+            timer = await Timer.create({ roundId: this.id, remaining: 5 })
         }
 
         while (timer.remaining > 0) {
