@@ -67,7 +67,7 @@ const Results = tether(function* ({props: { result, user }, redirect, Api: { Use
                 {result === user.id ? winner.map((letter, i) => <DelayedLetter key={i} index={i}>{letter}</DelayedLetter>) :
                 loser.map((letter, i) => <DelayedLetter key={i} index={i} result={'LOSS'}>{letter}</DelayedLetter>)}
             </div>
-            <RankImage src='http://clipart-library.com/image_gallery/n763807.png' />
+            <RankImage src={require(`../../assets/${user.rank.image}`)} />
             <PlayAgainButton onClick={async () => {
                     const user = await User.current();
                     await User.findMatching(user.rankId);

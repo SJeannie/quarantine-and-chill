@@ -1,6 +1,6 @@
 import React from 'react';
 import { tether, Column, Grid, Container } from '@triframe/designer';
-import { Ticker } from './Ticker';
+import { Ticker } from './ticker/Ticker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
