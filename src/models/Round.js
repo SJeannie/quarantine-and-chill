@@ -1,80 +1,92 @@
-import { Model, boolean, include, hasMany, hasOne, belongsTo, string, integer } from '@triframe/scribe';
+import {
+	Model,
+	boolean,
+	include,
+	hasMany,
+	hasOne,
+	belongsTo,
+	string,
+	integer,
+} from '@triframe/scribe';
 import { Resource } from '@triframe/core';
-import { sleep } from "@triframe/confectioner"
+import { sleep } from '@triframe/confectioner';
 import { User } from './User';
 
 export class Round extends Resource {
-    @include(Model)
+<<<<<<< HEAD
+	@include(Model)
+	@integer
+	result = null;
 
-    @integer
-    result = null;
+	@boolean
+	isFull = false;
 
-    @boolean
-    isFull = false;
+	@integer
+	timeRemaining = 5;
 
-    @integer
-    timeRemaining = 5
+	@hasMany({ as: 'round' })
+	users = [];
 
-    @hasMany({ as: 'round' })
-    users = [];
+	@belongsTo({ a: 'Rank' })
+	rank = null;
 
-    @belongsTo({ a: 'Rank' })
-    rank = null;
+	async checkResults() {
+		const [userA, userB] = await User.where({ roundId: this.id });
 
-    async checkResults() {
-        const [userA, userB] = await User.where({ roundId: this.id });
+		const result = {
+			rock: {
+				rock: null,
+				paper: userB,
+				scissors: userA,
+			},
+			paper: {
+				rock: userA,
+				paper: null,
+				scissors: userB,
+			},
+			scissors: {
+				rock: userB,
+				paper: userA,
+				scissors: null,
+			},
+		}[userA.choice][userB.choice];
 
-        const result = {
-            rock: {
-                rock: null,
-                paper: userB,
-                scissors: userA
-            },
-            paper: {
-                rock: userA,
-                paper: null,
-                scissors: userB
-            },
-            scissors: {
-                rock: userB,
-                paper: userA,
-                scissors: null
-            },
-        }[userA.choice][userB.choice];
+		if (result) {
+			this.result = result.id;
+		}
 
-        if (result) {
-            console.log(result)
-            result.id === userA.id ? await userA.promote() : await userA.demote()
-            result.id === userB.id ? await userB.promote() : await userB.demote()
-            
-            this.result = result.id
-        }
+		if (result === null) {
+			userA.choice = null;
+			userB.choice = null;
 
-        if (result === null) {
-            userA.choice = null;
-            userB.choice = null;
+			this.runTimer();
+		}
+	}
 
-            this.runTimer();
-        }
-    }
+	async runTimer() {
+		this.timeRemaining = 5;
 
-    async runTimer() {
-        this.timeRemaining = 5
+		while (this.timeRemaining > 0) {
+			await sleep(1000);
+			this.timeRemaining--;
+		}
 
-        while (this.timeRemaining > 0) {
-            await sleep(1000)
-            this.timeRemaining--
-        }
+		const users = await User.where({ roundId: this.id });
 
-        const users = await User.where({ roundId: this.id });
+		const madeAChoice = user => user.choice;
 
-        const madeAChoice = (user) => user.choice;
+		if (!users.every(madeAChoice) && users.some(madeAChoice)) {
+			const decisionMaker = users.find(user => user.choice);
 
-        if (!users.every(madeAChoice) && users.some(madeAChoice)) {
-            const decisionMaker = users.find(user => user.choice);
+			this.result = decisionMaker.id;
+		}
 
-            this.result = decisionMaker.id;
-        }
-    }
+		if (!users.some(madeAChoice)) {
+			users.forEach(user => {
+                user.choice = null
+            })
 
+			this.runTimer();
+		}
+	}
 }
