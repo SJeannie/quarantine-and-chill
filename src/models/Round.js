@@ -52,7 +52,7 @@ export class Round extends Resource {
 
 		if (result) {
             await (result === userA.id ? userA.promote() : userA.demote());
-            await (result === userB.id ? awaiuserB.promote() : userB.demote());
+            await (result === userB.id ? userB.promote() : userB.demote());
 
 			this.result = result.id;
 		}
