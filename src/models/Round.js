@@ -79,7 +79,11 @@ export class Round extends Resource {
 		const madeAChoice = user => user.choice;
 
 		if (!users.every(madeAChoice) && users.some(madeAChoice)) {
-			const decisionMaker = users.find(user => user.choice);
+            const decisionMaker = users.find(user => user.choice);
+            const nonDecisionMaker = users.find(user => !user.choice);
+
+            await decisionMaker.promote();
+            await nonDecisionMaker.demote();
 
 			this.result = decisionMaker.id;
 		}
