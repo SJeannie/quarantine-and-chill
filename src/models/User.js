@@ -10,7 +10,7 @@ export class User extends Resource {
     username = ''
 
 	@belongsTo ({ a: 'Rank' })
-	rank = Rank.read(1)
+	rank = (await Rank.where({position: 0}))[0]
 
 	@belongsTo ({ a: 'Round' })
     round = null
