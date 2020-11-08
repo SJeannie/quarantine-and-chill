@@ -5,7 +5,7 @@ import {
 	Heading,
 	Subheading,
 	Grid,
-	Column
+	Column,
 } from '@triframe/designer';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,7 +22,7 @@ const SignOutButton = styled.button`
 
 	&:hover {
 		box-shadow: -2px 0 #ab3c3c;
-    	left: -1px;
+		left: -1px;
 	}
 `;
 
@@ -35,11 +35,12 @@ const HeaderContainer = styled.div`
 
 export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 	const user = yield User.current();
-	
+
 	return (
 		<container
 			inline
 			style={{
+				marginTop: '10px',
 				backgroundColor: '#226fbe',
 				alignItems: 'center',
 				borderRadius: '8px',
@@ -50,7 +51,7 @@ export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 				<Column xs={8}>
 					<HeaderContainer userExists={!!user}>
 						<Heading>Quarantine and Chill: Evolution</Heading>
-						<Subheading>Hey {user.username}!!!</Subheading>
+						{user && <Subheading>Hey {user.username}!!!</Subheading>}
 					</HeaderContainer>
 				</Column>
 
