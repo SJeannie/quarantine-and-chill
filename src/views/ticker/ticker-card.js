@@ -19,15 +19,15 @@ const RankImage = styled.img`
     border-radius: 50%;
 `;
 
-const TickerCard = tether(({ props: { user }, Api: { Rank } }) => {
+const TickerCard = tether(function*({ props: { user }, Api: { Rank } }) {
     const rank = yield Rank.read(user.rankId);
-
+    console.log(rank.id);
     return (
         <Section key={user.id} >
             <Card>
                 <Grid base={9}>
                     <Column xs={4}>
-                        <RankImage src={require(`../assets/${rank.image}`)} /> 
+                        <RankImage src={require(`../../assets/${rank.image}`)} /> 
                     </Column>
                     <Column xs={4}>
                         <Subheading>{user.username}</Subheading>

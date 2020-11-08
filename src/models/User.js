@@ -73,19 +73,23 @@ export class User extends Resource {
 
     async promote() {
         this.isWinner = true
-        if(this.rankId<4){
-            this.rankId++
+        const rank = Rank.read(this.rankId);
+
+        if(rank.position < 3){
+            this.rankId = (await Rank.where({ position: rank.position + 1 }))[0].id;
         }
     }
 
     async demote() {
-        console.log("demoted")
         this.isWinner = false
-        if(this.rankId===4){
-            this.rankId=1
+        const rank = Rank.read(this.rankId);
+
+        if(rank.position === 3){
+            this.rankId = (await Rank.where({ position: 0 }))[0].id;
         }
-        if(this.rankId<4 && this.rankId>1){
-            this.rankId--
+        
+        if(rank.position < 3 && rank.position > 0){
+            this.rankId = (await Rank.where({ position: rank.position - 1 }))[0].id
         }
     }
 

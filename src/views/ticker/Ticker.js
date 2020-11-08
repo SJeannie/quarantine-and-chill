@@ -28,7 +28,7 @@ export const Ticker = tether(function* ({ Api }) {
 	return (
 		<Container>
 			<Heading>Players</Heading>
-			{users.map(user => <TickerCard user={user} />)}
+			{users.map(user => <TickerCard key={user.id} user={user} />)}
 		</Container>
 	);
 });
