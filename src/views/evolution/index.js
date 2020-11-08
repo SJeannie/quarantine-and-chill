@@ -4,6 +4,9 @@ import {
 } from '@triframe/designer';
 import styled from 'styled-components';
 import Results from './results';
+import rock from '../../assets/rock.jpg';
+import paper from '../../assets/paper.jpg';
+import scissors from '../../assets/scissors.jpg';
 
 const Container = styled.div`
     display: flex;
@@ -128,17 +131,20 @@ const Evolution = tether(function*({ props: { user }, Api }){
                 <Button onClick={() => {
                     user.makeChoice('rock');
                 }} disabled={user.choice !== null}>
-                    <ButtonImage src='http://clipart-library.com/images_k/rock-clipart-transparent/rock-clipart-transparent-5.jpg' />
+                    {/* <ButtonImage src='http://clipart-library.com/images_k/rock-clipart-transparent/rock-clipart-transparent-5.jpg' /> */}
+                    <ButtonImage src={rock}/>
                 </Button>
                 <Button color='green' onClick={() => {
                     user.makeChoice('paper')
                 }} disabled={user.choice !== null}>
-                    <ButtonImage src='http://clipart-library.com/data_images/64750.jpg' />
+                    {/* <ButtonImage src='http://clipart-library.com/data_images/64750.jpg' /> */}
+                    <ButtonImage src={paper}/>
                 </Button>
                 <Button color='blue' onClick={() => {
                     user.makeChoice('scissors')
                 }} disabled={user.choice !== null}>
-                    <ButtonImage src='http://clipart-library.com/new_gallery/scissors-clip-art-15.jpg' />
+                    {/* <ButtonImage src='http://clipart-library.com/new_gallery/scissors-clip-art-15.jpg' /> */}
+                    <ButtonImage src={scissors}/>
                 </Button>
             </ButtonWrapper>
         </Container>
