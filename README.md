@@ -1,3 +1,3 @@
 # quarantine-and-chill
 
-{user && <em style={{paddingBottom: '1.25em'}}>Hey {user.username}!</em>}
+A web app designed to show off the real time capabilities if the framework Triframe, and let us have a little fun at the same time!
