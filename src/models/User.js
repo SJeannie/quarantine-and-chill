@@ -9,6 +9,9 @@ export class User extends Resource {
 	@string
     username = ''
 
+    @string
+    choice = null
+
     @boolean
     isWinner = false
 
@@ -17,6 +20,12 @@ export class User extends Resource {
 
 	@belongsTo ({ a: 'Round' })
     round = null
+
+    async makeChoice(choice){
+        this.choice = choice;
+
+        const round = await Round.read(this.roundId);
+    }
 
     @session
     static async login(session, username){
