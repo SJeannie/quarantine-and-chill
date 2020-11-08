@@ -3,6 +3,7 @@ import {
 	tether,
 } from '@triframe/designer';
 import styled from 'styled-components';
+import Results from './results';
 
 const Container = styled.div`
     display: flex;
