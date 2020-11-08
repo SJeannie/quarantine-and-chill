@@ -13,7 +13,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
-    "@triframe/arbiter": "^0.5.0",
+    "@triframe/arbiter": "^0.5.1",
+    "@triframe/arbiter-react": "^0.4.5",
     "@triframe/core": "^0.2.4",
     "@triframe/scribe": "^0.2.7",
     "styled-components": "^5.2.1"
@@ -21,7 +22,7 @@
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@triframe/confectioner": "0.0.3",
-    "@triframe/designer": "^0.5.9",
+    "@triframe/designer": "^0.6.0",
     "@triframe/mason": "^0.2.3",
     "babel-plugin-styled-components": "^1.11.1",
     "babel-preset-triframe": "0.0.5",
