@@ -24,7 +24,8 @@ export const Login = tether(function* ({Api, redirect, session}) {
 			/>
 			<Button
 				onPress={async () => {
-					await User.login(form.username)
+					let user = await User.login(form.username)
+					await User.findMatching(user.rankId)
                     redirect('/')
 				}}
 			>

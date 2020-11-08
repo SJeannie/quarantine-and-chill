@@ -23,12 +23,12 @@ export class User extends Resource {
         let [ user ] = await User.where({ username });
 
         if (!user) {
-            user = await User.create({ username, rankId: (await Rank.where({position: 0}))[0].id })
+            user = await User.create({ username, rankId: (await Rank.where({position: 0}))[0].id })  
         }
 
         session.loggedInUserId = user.id
 
-        return null;
+        return user;
     }
 
     @session
