@@ -10,7 +10,7 @@ export class User extends Resource {
     username = ''
 
 	@belongsTo ({ a: 'Rank' })
-	rank = (await Rank.where({position: 0}))[0]
+	rank = null
 
 	@belongsTo ({ a: 'Round' })
     round = null
@@ -20,7 +20,7 @@ export class User extends Resource {
         let [ user ] = await User.where({ username });
 
         if (!user) {
-            user = await User.create({ username })
+            user = await User.create({ username, rankId: (await Rank.where({position: 0}))[0] })
         }
 
         session.loggedInUserId = user.id
