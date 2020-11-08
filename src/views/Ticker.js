@@ -36,24 +36,18 @@ export const Ticker = tether(function* ({ Api }) {
 		<Container>
 			<Heading>Players</Heading>
 			{users.map(user => {
+				let trendColor = user.isWinner ? '#24b662' : '#cb4e4e'
 				return (
 					<Section key={user.id} >
-						<Card>
+						<Card style={{backgroundColor: trendColor}}>
 							<Grid base={9}>
-								<Column xs={4}>
+								<Column xs={3} style={{alignItems: 'center', justifyContent: 'center'}}>
 									<RankImage src={require(`../assets/${user.rank.image}`)} /> 
 								</Column>
-								<Column xs={4}>
+								<Column xs={6}>
 									<Subheading>{user.username}</Subheading>
 									<Divider/>
 									<Paragraph>{user.rank.title}</Paragraph>
-								</Column>
-								<Column>
-									{user.isWinner ? (
-										<Icon name='arrow-up-circle-outline' />
-									) : (
-										<Icon name='arrow-down-circle' />
-									)}
 								</Column>
 							</Grid>
 						</Card>
