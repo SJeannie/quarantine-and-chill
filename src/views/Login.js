@@ -29,9 +29,7 @@ export const Login = tether(function* ({ Api, redirect, session }) {
 				onPress={async () => {
 					let user = await User.login(form.username);
 
-					if (!user.roundId) {
-						await User.findMatching(user.rankId);
-					}
+					await User.findMatching(user.rankId);
 
 					redirect('/');
 				}}

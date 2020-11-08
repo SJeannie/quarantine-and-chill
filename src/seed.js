@@ -14,7 +14,7 @@ export const seed = async () => {
     await Rank.create({
 			title: 'Raptor',
 			position: 1,
-			image: 'egg.png',
+			image: 'raptor.png',
 		});
     await Rank.create({
 			title: 'Chicken',

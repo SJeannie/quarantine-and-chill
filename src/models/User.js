@@ -60,7 +60,8 @@ export class User extends Resource {
     @session
     static async findMatching(session, rankId){
         const user = await User.read(session.loggedInUserId)
-        user.choice = null
+        user.choice = null;
+        user.roundId = null;
 
         let [round]  = await Round.where({rankId: rankId, isFull: false});
         
@@ -75,21 +76,24 @@ export class User extends Resource {
     }
 
     async promote() {
-        console.log("promoted")
         this.isWinner = true
-        if(this.rankId<4){
-            this.rankId++
+        const rank = await Rank.read(this.rankId);
+
+        if(rank.position < 3){
+            this.rankId = (await Rank.where({ position: rank.position + 1 }))[0].id;
         }
     }
 
     async demote() {
-        console.log("demoted")
         this.isWinner = false
-        if(this.rankId===4){
-            this.rankId=1
+        const rank = await Rank.read(this.rankId);
+
+        if(rank.position === 3){
+            this.rankId = (await Rank.where({ position: 0 }))[0].id;
         }
-        if(this.rankId<4 && this.rankId>1){
-            this.rankId--
+
+        if(rank.position < 3 && rank.position > 0){
+            this.rankId = (await Rank.where({ position: rank.position - 1 }))[0].id
         }
     }
 
