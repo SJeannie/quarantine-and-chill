@@ -5,7 +5,7 @@ export class Timer extends Resource {
     @include(Model)
 
     @integer
-    remaining = 300
+    remaining = 5
 
     @belongsTo ({ a: 'Round' })
     round = null
