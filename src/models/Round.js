@@ -43,6 +43,10 @@ export class Round extends Resource {
         }[userA.choice][userB.choice];
 
         if (result) {
+            console.log(result)
+            result.id === userA.id ? await userA.promote() : await userA.demote()
+            result.id === userB.id ? await userB.promote() : await userB.demote()
+            
             this.result = result.id
         }
 

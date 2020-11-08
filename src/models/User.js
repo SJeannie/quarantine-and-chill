@@ -71,24 +71,22 @@ export class User extends Resource {
         user.roundId = round.id  
     }
 
-    @session
-    async promote(session) {
-        user = await User.read(session.loggedInUserId)
-        user.isWinner = true
-        if(user.rankId<4){
-            user.rankId++
+    async promote() {
+        console.log("promoted")
+        this.isWinner = true
+        if(this.rankId<4){
+            this.rankId++
         }
     }
 
-    @session
-    async demote(session) {
-        user = await User.read(session.loggedInUserId)
-        user.isWinner = false
-        if(user.rankId===4){
-            user.rankId=1
+    async demote() {
+        console.log("demoted")
+        this.isWinner = false
+        if(this.rankId===4){
+            this.rankId=1
         }
-        if(user.rankId<4 && user.rankId>1){
-            user.rankId--
+        if(this.rankId<4 && this.rankId>1){
+            this.rankId--
         }
     }
 
