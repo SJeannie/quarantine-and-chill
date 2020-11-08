@@ -65,6 +65,7 @@ export class User extends Resource {
             round = await Round.create({rankId: rankId})
         } else {
             round.isFull = true
+            round.runTimer()
         }
         const user = await User.read(session.loggedInUserId)
         user.roundId = round.id  

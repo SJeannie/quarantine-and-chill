@@ -113,19 +113,18 @@ const NumberDisplay = styled.div`
     font-size: 10em;
 `;
 
-const Evolution = tether(function*({ props: { user }, afterFirstRender }){
-    afterFirstRender(() => {
-        user.round.runTimer();
-    });
+const Evolution = tether(function*({ props: { user }, Api }){
+    
+    const round = yield Api.Round.read(user.round.id)
+
     console.log(user.round);
-    if (!user.round.timer) {
-        return null;
-    }
+
+    console.log(user.round.timeRemaining)
 
     return (
-        user.round.result ? <Results result={user.round.result} /> : (
+        round.result ? <Results result={round.result} /> : (
         <Container>
-            <NumberDisplay>{user.round.timer.remaining}</NumberDisplay>
+            <NumberDisplay>{round.timeRemaining}</NumberDisplay>
             <HandsWrapper>
                 <LeftHand src='http://clipart-library.com/img1/1238756.png' alt='left hand' />
                 <RightHand src='http://clipart-library.com/img1/1238756.png' alt='right hand' />
