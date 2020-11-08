@@ -28,10 +28,7 @@ export const Ticker = tether(function* ({ Api }) {
 	return (
 		<Container>
 			<Heading>Players</Heading>
-			{users.map(user => {
-				let trendColor = user.isWinner ? '#24b662' : '#cb4e4e';
-				return <TickerCard key={user.id} user={user} color={trendColor} />;
-			})}
+			{users.map(user => <TickerCard key={user.id} user={user} />)}
 		</Container>
 	);
 });

@@ -19,14 +19,14 @@ const RankImage = styled.img`
     border-radius: 50%;
 `;
 
-const TickerCard = tether(function*({ props: { user, color }, Api: { Rank } }) {
+const TickerCard = tether(function*({ props: { user }, Api: { Rank } }) {
     const rank = yield Rank.read(user.rankId);
 
     return (
 			<Section key={user.id}>
 				<Card
 					style={{
-						backgroundColor: color,
+						backgroundColor: user.isWinner ? '#24b662' : '#cb4e4e',
 					}}
 				>
 					<Grid base={9}>
