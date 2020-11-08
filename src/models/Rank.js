@@ -6,8 +6,8 @@ export class Rank extends Resource {
 	@string
 	title = '' // levels = egg 0, raptor 1, chicken 2, overlord 3
 
-	// @string
-	// image = ''
+	@string
+	image = ''
 
 	@integer  // rank as a number
 	position = 0

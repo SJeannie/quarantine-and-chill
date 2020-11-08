@@ -8,6 +8,6 @@ serve(path.resolve(__dirname, './models'), {
         loggedInUserId: null
     }
 }).then(async function(){
-    let [rank] = await Rank.list()
-    rank ? null : seed()
+    let [rank] = await Rank.where({position: 0})
+    !rank ? seed() : null
 })

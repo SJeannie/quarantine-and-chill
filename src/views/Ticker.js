@@ -3,8 +3,6 @@ import {
 	tether,
 	Container,
 	Card,
-	Area,
-	Button,
 	Heading,
 	Subheading,
 	Grid,
@@ -15,16 +13,24 @@ import {
 	Section,
 	Paragraph,
 } from '@triframe/designer';
+import styled from 'styled-components';
 
 export const Ticker = tether(function* ({ Api }) {
-	const { User, Rank } = Api;
+	const { User } = Api;
 
 	let users = yield User.list(`
         *,
         rank {
             *
         }
-    `);
+	`);
+	
+	const RankImage = styled.img`
+		width: 2em;
+		height: auto;
+		mix-blend-mode: multiply;
+		border-radius: 50%;
+	`;
 
 	return (
 		<Container>
@@ -35,7 +41,7 @@ export const Ticker = tether(function* ({ Api }) {
 						<Card>
 							<Grid base={9}>
 								<Column xs={4}>
-									<Avatar.Image /> 
+									<RankImage src={require(`../assets/${user.rank.image}`)} /> 
 								</Column>
 								<Column xs={4}>
 									<Subheading>{user.username}</Subheading>
