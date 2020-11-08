@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { tether } from '@triframe/designer';
 
 const Container = styled.div`
     display: flex;
@@ -56,7 +57,9 @@ const PlayAgainButton = styled.button`
     }
 `;
 
-const Results = (result) => {
+const Results = tether(function* ({props: {result}, Api, redirect, session}){
+
+    const { User } = Api
     const winner = ['W', 'I', 'N', 'N', 'E', 'R', '!'];
     const loser = ['G', 'A', 'N', 'B', 'A', 'T', 'T', 'E', '!'];
 
@@ -67,9 +70,14 @@ const Results = (result) => {
                 loser.map((letter, i) => <DelayedLetter key={i} index={i} result={'LOSS'}>{letter}</DelayedLetter>)}
             </div>
             <RankImage src='http://clipart-library.com/image_gallery/n763807.png' />
-            <PlayAgainButton>Play Again</PlayAgainButton>
+            <PlayAgainButton onClick={async () => {
+                    let user = await User.current()
+                    await User.findMatching(user.rankId)
+                    
+                    redirect('/')
+				}}>Play Again</PlayAgainButton>
         </Container>
     )
-}
+})
 
 export default Results;
