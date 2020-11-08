@@ -36,10 +36,10 @@ export const Ticker = tether(function* ({ Api, redirect }) {
 					<Section>
 						<Card>
 							<Grid base={9}>
-								<Column xs={4} sm={4} md={4} lg={4} xl={4}>
+								<Column xs={4}>
 									<Avatar.Image />
 								</Column>
-								<Column xs={4} sm={4} md={4} lg={4} xl={4}>
+								<Column xs={4}>
 									<Subheading>{user.username}</Subheading>
 									<Divider></Divider>
 									<Paragraph>{user.rank.title}</Paragraph>

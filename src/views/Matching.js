@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	tether,
 	Column,
-	Grid
+	Grid,
+	Container
 } from '@triframe/designer';
 import { Ticker } from './Ticker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,9 +18,11 @@ const MatchingContainer = styled.div`
 
 export const Matching = tether(function* ({ Api, redirect, session }) {
 	return (
-		<MatchingContainer>
-			<FontAwesomeIcon icon={faCircleNotch} spin />&nbsp;
-			matching…
-		</MatchingContainer>
+		<Container>
+					<MatchingContainer>
+						<FontAwesomeIcon icon={faCircleNotch} spin />
+						&nbsp; matching…
+					</MatchingContainer>
+		</Container>
 	);
 });

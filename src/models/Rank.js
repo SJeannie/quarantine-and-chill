@@ -13,6 +13,6 @@ export class Rank extends Resource {
 	position = 0
 
 	@hasMany({ as: 'rank'})
-  users = []
+  	users = []
 
 }
