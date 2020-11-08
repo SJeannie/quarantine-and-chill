@@ -1,8 +1,11 @@
 import React from 'react';
 import {
 	tether,
-	Appbar,
-    Heading,
+	Container,
+	Heading,
+	Subheading,
+	Grid,
+	Column
 } from '@triframe/designer';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,29 +29,46 @@ const SignOutButton = styled.button`
 const HeaderContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: ${props => props.userExists ? '1em' : '0'};
+	align-items: 'center';
+	background-color: #226fbe;
 `;
 
 export const NavBar = tether(function* ({ Api: { User }, redirect }) {
 	const user = yield User.current();
 	
 	return (
-		<Appbar inline>
-			<HeaderContainer userExists={!!user}>
-				<Heading>Quarantine and Chill</Heading>
-				{user && <em style={{paddingBottom: '1.25em'}}>Hey {user.username}!</em>}
-			</HeaderContainer>
-			{user && (
-					<SignOutButton
-						onClick={async () => {
-						await User.logout();
+		<container
+			inline
+			style={{
+				backgroundColor: '#226fbe',
+				alignItems: 'center',
+				borderRadius: '8px',
+				padding: '3px',
+			}}
+		>
+			<Grid base={9}>
+				<Column xs={8}>
+					<HeaderContainer userExists={!!user}>
+						<Heading>Quarantine and Chill</Heading>
+						<Subheading>Hey {user.username}!!!</Subheading>
+					</HeaderContainer>
+				</Column>
 
-						redirect('/login');
-						}}
-					>
-						<FontAwesomeIcon icon={faSignOutAlt} />
-					</SignOutButton>
-			)}
-		</Appbar>
+				{user && (
+					<Column>
+						<SignOutButton
+							onClick={async () => {
+								await User.logout();
+
+								redirect('/login');
+							}}
+						>
+							{'Logout   '}
+							<FontAwesomeIcon icon={faSignOutAlt} />
+						</SignOutButton>
+					</Column>
+				)}
+			</Grid>
+		</container>
 	);
 });
