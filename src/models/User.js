@@ -59,15 +59,18 @@ export class User extends Resource {
 
     @session
     static async findMatching(session, rankId){
-        let [round]  = await Round.where({rankId: rankId, isFull: false});
+        const user = await User.read(session.loggedInUserId)
+        user.choice = null
 
+        let [round]  = await Round.where({rankId: rankId, isFull: false});
+        
         if (!round) {
             round = await Round.create({rankId: rankId})
         } else {
             round.isFull = true
             round.runTimer()
         }
-        const user = await User.read(session.loggedInUserId)
+        
         user.roundId = round.id  
     }
 
