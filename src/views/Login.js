@@ -4,8 +4,9 @@ import {
 	Container,
 	Heading,
 	TextInput,
-	Button,
 } from '@triframe/designer';
+import evolution_word from '../../assets/evolution_word.jpg';
+import evolution from '../../assets/evolution.jpg';
 
 export const Login = tether(function* ({ Api, redirect, session }) {
 	const { User } = Api;
@@ -16,7 +17,6 @@ export const Login = tether(function* ({ Api, redirect, session }) {
 		username: '',
 	};
 
-
 	return (
 		<Container>
 			<Heading>Login</Heading>
@@ -25,7 +25,12 @@ export const Login = tether(function* ({ Api, redirect, session }) {
 				value={form.username}
 				onChange={value => (form.username = value)}
 			/>
-			<Button
+			<img src={evolution_word}/>
+			<button style={{
+                    backgroundColor: '#24B662',
+                    height: '5em',
+                    borderRadius: '0px 0px 10px 10px',
+                }}
 				onPress={async () => {
 					let user = await User.login(form.username);
 
@@ -35,7 +40,8 @@ export const Login = tether(function* ({ Api, redirect, session }) {
 				}}
 			>
 				Log in
-			</Button>
+			</button>
+			<img src={evolution}/>
 		</Container>
 	);
 });
