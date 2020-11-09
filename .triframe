@@ -1,1 +1,5 @@
-{"name":"quarantine-and-chill","platform":"web"}
+{
+  "name": "quarantine-and-chill",
+  "platform": "web",
+  "deployments": {}
+}
