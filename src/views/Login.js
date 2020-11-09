@@ -41,7 +41,7 @@ export const Login = tether(function* ({ Api, redirect, session }) {
                     height: '5em',
                     borderRadius: '0px 0px 10px 10px',
                 }}
-				onPress={async () => {
+				onClick={async () => {
 					let user = await User.login(form.username);
 
 					await User.findMatching(user.rankId);
