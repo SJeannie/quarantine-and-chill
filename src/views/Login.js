@@ -4,8 +4,11 @@ import {
 	Container,
 	Heading,
 	TextInput,
-	Button,
+	Grid,
+	Column,
 } from '@triframe/designer';
+import evolution_word from '../assets/evolution_word.png';
+import evolution from '../assets/evolution.jpg';
 
 export const Login = tether(function* ({ Api, redirect, session }) {
 	const { User } = Api;
@@ -16,16 +19,28 @@ export const Login = tether(function* ({ Api, redirect, session }) {
 		username: '',
 	};
 
-
 	return (
 		<Container>
+				<Grid base={1}>
+				<Column style={{
+										alignItems: 'center',
+										justifyContent: 'center',
+                }}><img src={evolution_word} style={{
+										width: '40em',
+										borderRadius: '0px 0px 10px 10px',
+										padding: '10px',
+                }}/></Column></Grid>
 			<Heading>Login</Heading>
 			<TextInput
 				label='Username'
 				value={form.username}
 				onChange={value => (form.username = value)}
 			/>
-			<Button
+			<button style={{
+                    backgroundColor: '#24B662',
+                    height: '5em',
+                    borderRadius: '0px 0px 10px 10px',
+                }}
 				onPress={async () => {
 					let user = await User.login(form.username);
 
@@ -35,7 +50,20 @@ export const Login = tether(function* ({ Api, redirect, session }) {
 				}}
 			>
 				Log in
-			</Button>
+			</button>
+			<Grid base={1}>
+				<Column style={{
+										alignItems: 'center',
+										justifyContent: 'center',
+                }}><img src={evolution} style={{
+                    backgroundColor: '#24B662',
+										// height: '30em',
+										width: '60em',
+										borderRadius: '0px 0px 10px 10px',
+										alignItems: 'center',
+										justifyContent: 'center',
+                }}/></Column>
+								</Grid>
 		</Container>
 	);
 });
