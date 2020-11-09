@@ -1,5 +1,10 @@
 {
   "name": "quarantine-and-chill",
   "platform": "web",
-  "deployments": {}
+  "deployments": {
+    "staging": {
+      "target": "Heroku",
+      "options": {}
+    }
+  }
 }
